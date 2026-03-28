@@ -1,5 +1,5 @@
 /*
- * TokenLedger — Article Schema Component
+ * Token Continent — Article Schema Component
  * Injects JSON-LD structured data for NewsArticle schema
  * Required for Google rich results and GEO citations
  */
@@ -10,6 +10,9 @@ import { Article } from "@/lib/articles";
 interface ArticleSchemaProps {
   article: Article;
 }
+
+const SITE_URL = "https://www.tokencontinent.com";
+const SITE_NAME = "Token Continent";
 
 export default function ArticleSchema({ article }: ArticleSchemaProps) {
   useEffect(() => {
@@ -25,20 +28,20 @@ export default function ArticleSchema({ article }: ArticleSchemaProps) {
         "@type": "Person",
         "name": article.author,
         "jobTitle": article.authorRole,
-        "url": `https://tokenledger.ai/author/${article.author.toLowerCase().replace(/\s+/g, "-")}`
+        "url": `${SITE_URL}/author/${article.author.toLowerCase().replace(/\s+/g, "-")}`
       },
       "publisher": {
         "@type": "NewsMediaOrganization",
-        "name": "TokenLedger",
-        "url": "https://tokenledger.ai",
+        "name": SITE_NAME,
+        "url": SITE_URL,
         "logo": {
           "@type": "ImageObject",
-          "url": "https://tokenledger.ai/favicon.svg"
+          "url": `${SITE_URL}/favicon.svg`
         }
       },
       "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": `https://tokenledger.ai/article/${article.slug}`
+        "@id": `${SITE_URL}/article/${article.slug}`
       },
       "articleSection": article.category,
       "keywords": article.tags.join(", "),

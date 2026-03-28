@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://tokenledger.ai/sitemap.xml
+Sitemap: https://www.tokencontinent.com/sitemap.xml
 
 # AI crawlers — allow for GEO visibility
 User-agent: GPTBot
