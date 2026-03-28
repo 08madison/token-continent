@@ -1,6 +1,6 @@
 /*
- * TokenLedger — Articles Data Store
- * Design: Terminal Noir — dark editorial, Bloomberg-style data density
+ * Token Continent — Articles Data Store
+ * Design: Editorial Light — content-first, clean and readable
  * All article content is structured for SEO/GEO optimization:
  * - Self-contained paragraphs for AI extraction
  * - Clear factual claims with citations

@@ -1,20 +1,19 @@
 /*
- * TokenLedger — Home Page
- * Design: Terminal Noir — asymmetric editorial layout
- * Layout: Full-bleed hero → 2-col featured → 3-col grid + sidebar
- * SEO: Structured content with clear headings, self-contained paragraphs
+ * Token Continent — Home Page
+ * Design: Editorial Light — content-first, newspaper-inspired layout
+ * Layout: Hero lead story → 3-col featured → full-width latest feed + sidebar
+ * Philosophy: Articles dominate. No hard ads. Clean, scannable, high-density.
  */
 
 import { useState } from "react";
 import { Link } from "wouter";
-import { ArrowRight, TrendingUp, Cpu, BookOpen, Zap } from "lucide-react";
+import { ArrowRight, Clock, TrendingUp, Cpu, BookOpen, Zap, ChevronRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ArticleCard from "@/components/ArticleCard";
 import {
   articles,
   getFeaturedArticles,
-  getRecentArticles,
   getAllCategories,
   CATEGORY_COLORS,
   type Category,
@@ -22,86 +21,118 @@ import {
 
 const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663268995439/ibhnTzn7FkYdJFgZFYPNt7/hero-bg-VR4GjaR2k9iPEr3rj4ityq.webp";
 
+// Category badge helper
+function CatBadge({ cat }: { cat: string }) {
+  const map: Record<string, string> = {
+    "Token Economics": "cat-token",
+    "LLM Research": "cat-llm",
+    "GPU & Infrastructure": "cat-gpu",
+    "Industry News": "cat-news",
+    "Analysis": "cat-analysis",
+    "Opinion": "cat-opinion",
+  };
+  return <span className={`cat-badge ${map[cat] ?? "cat-news"}`}>{cat}</span>;
+}
+
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState<Category | "All">("All");
   const featured = getFeaturedArticles();
-  const recent = getRecentArticles(8);
   const categories = getAllCategories();
 
-  const filteredArticles = activeCategory === "All"
-    ? articles
-    : articles.filter((a) => a.category === activeCategory);
-
   const heroArticle = featured[0];
-  const secondFeatured = featured[1];
-  const sidebarArticles = articles.slice(2, 7);
+  const secondaryArticles = featured.slice(1, 4);
+  const sidebarArticles = articles.slice(4, 9);
+
+  const filteredArticles = activeCategory === "All"
+    ? articles.slice(0, 12)
+    : articles.filter((a) => a.category === activeCategory).slice(0, 12);
 
   return (
-    <div className="min-h-screen bg-[oklch(0.098_0.008_264)] flex flex-col">
+    <div className="min-h-screen bg-white flex flex-col">
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${HERO_BG})` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[oklch(0.098_0.008_264/0.95)] via-[oklch(0.098_0.008_264/0.75)] to-[oklch(0.098_0.008_264/0.3)]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[oklch(0.098_0.008_264)] via-transparent to-transparent" />
+      {/* ── HERO LEAD STORY ── */}
+      <section className="border-b border-gray-200">
+        <div className="container py-0">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-0 lg:gap-0">
+            {/* Left: Hero Article */}
+            <Link href={`/article/${heroArticle.slug}`}>
+              <div className="group relative overflow-hidden cursor-pointer border-r-0 lg:border-r border-gray-200 pr-0 lg:pr-8 py-6">
+                <div className="flex items-center gap-2 mb-3">
+                  <CatBadge cat={heroArticle.category} />
+                  <span className="font-mono text-[10px] text-gray-400 uppercase tracking-widest">Featured</span>
+                </div>
+                <h1 className="font-['Space_Grotesk'] font-800 text-gray-900 text-2xl sm:text-3xl lg:text-[2rem] leading-tight mb-3 tracking-tight group-hover:text-[#0096B4] transition-colors">
+                  {heroArticle.title}
+                </h1>
+                <p className="text-gray-600 text-base leading-relaxed mb-4 font-['Source_Serif_4'] max-w-xl">
+                  {heroArticle.excerpt}
+                </p>
+                <div className="flex items-center gap-3 text-gray-400 text-xs font-['Space_Grotesk']">
+                  <span className="font-500 text-gray-700">{heroArticle.author}</span>
+                  <span>·</span>
+                  <span className="font-mono">{heroArticle.publishedAt}</span>
+                  <span>·</span>
+                  <span className="flex items-center gap-1"><Clock size={10} />{heroArticle.readTime} min read</span>
+                </div>
+              </div>
+            </Link>
 
-        <div className="relative container py-16 lg:py-20">
-          <div className="max-w-3xl">
-            {/* Eyebrow */}
-            <div className="flex items-center gap-2 mb-5">
-              <div className="w-1 h-4 bg-[oklch(0.82_0.18_195)] rounded-full" />
-              <span className="font-mono text-[10px] text-[oklch(0.82_0.18_195)] uppercase tracking-widest">
-                Featured Analysis
-              </span>
-            </div>
-
-            {/* Headline */}
-            <h1 className="font-['Space_Grotesk'] font-700 text-[oklch(0.96_0.006_65)] text-3xl sm:text-4xl lg:text-5xl leading-tight mb-4 tracking-tight">
-              {heroArticle.title}
-            </h1>
-
-            <p className="text-[oklch(0.65_0.008_65)] text-base sm:text-lg leading-relaxed mb-6 max-w-2xl font-['Source_Serif_4']">
-              {heroArticle.excerpt}
-            </p>
-
-            <div className="flex items-center gap-4 flex-wrap">
+            {/* Right: Hero Image + 2 secondary stories */}
+            <div className="py-6 pl-0 lg:pl-8 space-y-0">
+              {/* Hero image */}
               <Link href={`/article/${heroArticle.slug}`}>
-                <button className="flex items-center gap-2 px-5 py-2.5 bg-[oklch(0.82_0.18_195)] text-[oklch(0.098_0.008_264)] rounded-sm font-['Space_Grotesk'] font-600 text-sm hover:bg-[oklch(0.88_0.18_195)] transition-colors">
-                  Read Analysis
-                  <ArrowRight size={14} />
-                </button>
+                <div className="relative overflow-hidden rounded-sm mb-5 cursor-pointer group aspect-[16/9]">
+                  <img
+                    src={heroArticle.image}
+                    alt={heroArticle.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
               </Link>
-              <div className="flex items-center gap-2 text-[oklch(0.45_0.008_264)]">
-                <span className="font-['Space_Grotesk'] text-xs">{heroArticle.author}</span>
-                <span>·</span>
-                <span className="font-mono text-xs">{heroArticle.readTime} min read</span>
-                <span>·</span>
-                <span className="font-mono text-xs">{heroArticle.publishedAt}</span>
+              {/* 2 secondary stacked */}
+              <div className="space-y-4">
+                {secondaryArticles.slice(0, 2).map((article) => (
+                  <Link key={article.id} href={`/article/${article.slug}`}>
+                    <div className="group flex gap-3 cursor-pointer py-3 border-t border-gray-100">
+                      <div className="flex-1 min-w-0">
+                        <CatBadge cat={article.category} />
+                        <h3 className="font-['Space_Grotesk'] font-700 text-gray-900 text-sm leading-snug mt-1.5 group-hover:text-[#0096B4] transition-colors line-clamp-2">
+                          {article.title}
+                        </h3>
+                        <div className="flex items-center gap-2 mt-1.5 text-gray-400 text-[11px] font-mono">
+                          <span>{article.publishedAt}</span>
+                          <span>·</span>
+                          <span>{article.readTime}m</span>
+                        </div>
+                      </div>
+                      <div className="w-20 h-16 flex-shrink-0 overflow-hidden rounded-sm">
+                        <img src={article.image} alt={article.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                      </div>
+                    </div>
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Stats Bar */}
-      <div className="border-y border-[oklch(0.22_0.008_264)] bg-[oklch(0.11_0.008_264)]">
+      {/* ── STATS BAR ── */}
+      <div className="bg-gray-50 border-b border-gray-200">
         <div className="container">
-          <div className="grid grid-cols-2 sm:grid-cols-4 divide-x divide-[oklch(0.22_0.008_264)]">
+          <div className="grid grid-cols-2 sm:grid-cols-4 divide-x divide-gray-200">
             {[
-              { icon: <TrendingUp size={14} />, label: "Articles Published", value: "5–10 / day" },
-              { icon: <Zap size={14} />, label: "Token Providers Tracked", value: "24+" },
-              { icon: <Cpu size={14} />, label: "GPU Platforms Monitored", value: "12+" },
-              { icon: <BookOpen size={14} />, label: "Newsletter Subscribers", value: "12,000+" },
+              { icon: <TrendingUp size={13} />, label: "Articles / Day", value: "5–10" },
+              { icon: <Zap size={13} />, label: "Token Providers", value: "24+" },
+              { icon: <Cpu size={13} />, label: "GPU Platforms", value: "12+" },
+              { icon: <BookOpen size={13} />, label: "Subscribers", value: "12,000+" },
             ].map(({ icon, label, value }) => (
-              <div key={label} className="flex items-center gap-3 px-4 py-3">
-                <span className="text-[oklch(0.82_0.18_195)]">{icon}</span>
+              <div key={label} className="flex items-center gap-2.5 px-4 py-3">
+                <span className="text-[#0096B4]">{icon}</span>
                 <div>
-                  <div className="font-['Space_Grotesk'] font-700 text-[oklch(0.91_0.006_65)] text-sm">{value}</div>
-                  <div className="font-mono text-[10px] text-[oklch(0.45_0.008_264)] uppercase tracking-wide">{label}</div>
+                  <div className="font-['Space_Grotesk'] font-700 text-gray-900 text-sm">{value}</div>
+                  <div className="font-mono text-[10px] text-gray-400 uppercase tracking-wide">{label}</div>
                 </div>
               </div>
             ))}
@@ -109,62 +140,69 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Main Content */}
-      <main className="container py-10 flex-1">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8">
-          {/* Left: Main Feed */}
+      {/* ── MAIN CONTENT ── */}
+      <main className="container py-8 flex-1">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-8">
+
+          {/* ── LEFT: Main Feed ── */}
           <div>
-            {/* Featured 2-up */}
+            {/* Top Stories 3-col grid */}
             <div className="mb-8">
-              <div className="flex items-center gap-2 mb-5">
-                <div className="w-1 h-4 bg-[oklch(0.82_0.18_195)] rounded-full" />
-                <h2 className="font-['Space_Grotesk'] font-700 text-[oklch(0.91_0.006_65)] text-sm uppercase tracking-widest">
-                  Top Stories
-                </h2>
-                <div className="flex-1 h-px bg-[oklch(0.22_0.008_264)]" />
+              <div className="section-heading">
+                <span>Top Stories</span>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {featured.map((article, i) => (
-                  <ArticleCard
-                    key={article.id}
-                    article={article}
-                    variant="featured"
-                    style={{ animationDelay: `${i * 60}ms` }}
-                  />
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {secondaryArticles.map((article) => (
+                  <ArticleCard key={article.id} article={article} variant="default" />
                 ))}
               </div>
             </div>
 
-            {/* Category Filter */}
-            <div className="mb-6">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-1 h-4 bg-[oklch(0.82_0.18_195)] rounded-full" />
-                <h2 className="font-['Space_Grotesk'] font-700 text-[oklch(0.91_0.006_65)] text-sm uppercase tracking-widest">
-                  Latest Coverage
-                </h2>
-                <div className="flex-1 h-px bg-[oklch(0.22_0.008_264)]" />
+            {/* Category Filter + Latest */}
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <div className="section-heading" style={{ marginBottom: 0, flex: 1 }}>
+                  <span>Latest Coverage</span>
+                </div>
               </div>
-              <div className="flex flex-wrap gap-1.5">
+
+              {/* Category Pills */}
+              <div className="flex flex-wrap gap-1.5 mb-5">
                 <button
                   onClick={() => setActiveCategory("All")}
-                  className={`px-3 py-1 rounded-sm text-xs font-['Space_Grotesk'] font-500 transition-colors ${
+                  className={`px-3 py-1 rounded-sm text-xs font-['Space_Grotesk'] font-500 transition-colors border ${
                     activeCategory === "All"
-                      ? "bg-[oklch(0.82_0.18_195)] text-[oklch(0.098_0.008_264)]"
-                      : "border border-[oklch(0.22_0.008_264)] text-[oklch(0.55_0.016_264)] hover:text-[oklch(0.91_0.006_65)] hover:border-[oklch(0.35_0.008_264)]"
+                      ? "bg-[#0096B4] text-white border-[#0096B4]"
+                      : "border-gray-200 text-gray-500 hover:text-gray-800 hover:border-gray-300 bg-white"
                   }`}
                 >
                   All
                 </button>
                 {categories.map((cat) => {
-                  const colors = CATEGORY_COLORS[cat];
+                  const colorMap: Record<string, string> = {
+                    "Token Economics": "active:bg-[#E0F7FA] active:text-[#0096B4] active:border-[#0096B4]",
+                    "LLM Research": "active:bg-[#EDE9FE] active:text-[#7C3AED] active:border-[#7C3AED]",
+                    "GPU & Infrastructure": "active:bg-[#D1FAE5] active:text-[#059669] active:border-[#059669]",
+                    "Industry News": "active:bg-[#FEE2E2] active:text-[#DC2626] active:border-[#DC2626]",
+                    "Analysis": "active:bg-[#FEF3C7] active:text-[#D97706] active:border-[#D97706]",
+                    "Opinion": "active:bg-[#FCE7F3] active:text-[#DB2777] active:border-[#DB2777]",
+                  };
+                  const activeStyles: Record<string, string> = {
+                    "Token Economics": "bg-[#E0F7FA] text-[#0096B4] border-[#0096B4]",
+                    "LLM Research": "bg-[#EDE9FE] text-[#7C3AED] border-[#7C3AED]",
+                    "GPU & Infrastructure": "bg-[#D1FAE5] text-[#059669] border-[#059669]",
+                    "Industry News": "bg-[#FEE2E2] text-[#DC2626] border-[#DC2626]",
+                    "Analysis": "bg-[#FEF3C7] text-[#D97706] border-[#D97706]",
+                    "Opinion": "bg-[#FCE7F3] text-[#DB2777] border-[#DB2777]",
+                  };
                   return (
                     <button
                       key={cat}
                       onClick={() => setActiveCategory(cat)}
                       className={`px-3 py-1 rounded-sm text-xs font-['Space_Grotesk'] font-500 transition-colors border ${
                         activeCategory === cat
-                          ? colors
-                          : "border-[oklch(0.22_0.008_264)] text-[oklch(0.55_0.016_264)] hover:text-[oklch(0.91_0.006_65)] hover:border-[oklch(0.35_0.008_264)]"
+                          ? activeStyles[cat]
+                          : "border-gray-200 text-gray-500 hover:text-gray-800 hover:border-gray-300 bg-white"
                       }`}
                     >
                       {cat}
@@ -172,101 +210,113 @@ export default function Home() {
                   );
                 })}
               </div>
-            </div>
 
-            {/* Article Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {filteredArticles.map((article, i) => (
-                <ArticleCard
-                  key={article.id}
-                  article={article}
-                  variant="default"
-                  style={{ animationDelay: `${i * 60}ms` }}
-                />
-              ))}
+              {/* Article Grid — 2 col */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {filteredArticles.map((article, i) => (
+                  <ArticleCard
+                    key={article.id}
+                    article={article}
+                    variant="default"
+                    style={{ animationDelay: `${i * 40}ms` }}
+                  />
+                ))}
+              </div>
+
+              {/* Load More */}
+              <div className="mt-6 text-center">
+                <button className="px-6 py-2.5 border border-gray-200 rounded-sm text-sm font-['Space_Grotesk'] font-500 text-gray-600 hover:text-[#0096B4] hover:border-[#0096B4]/40 transition-colors">
+                  Load More Articles
+                </button>
+              </div>
             </div>
           </div>
 
-          {/* Right Sidebar */}
+          {/* ── RIGHT SIDEBAR ── */}
           <aside className="space-y-6">
-            {/* CTA: Buy Tokens */}
-            <div className="rounded-sm border border-[oklch(0.82_0.18_195/0.3)] bg-gradient-to-br from-[oklch(0.82_0.18_195/0.08)] to-[oklch(0.13_0.008_264)] p-5">
-              <div className="flex items-center gap-2 mb-3">
-                <Zap size={14} className="text-[oklch(0.82_0.18_195)]" />
-                <span className="font-mono text-[10px] text-[oklch(0.82_0.18_195)] uppercase tracking-widest">Partner</span>
-              </div>
-              <h3 className="font-['Space_Grotesk'] font-700 text-[oklch(0.91_0.006_65)] text-base mb-2">
-                Access AI Tokens at Scale
-              </h3>
-              <p className="text-[oklch(0.45_0.008_264)] text-xs leading-relaxed mb-4 font-['Source_Serif_4']">
-                Get discounted access to GPT-4o, Claude, Gemini, and 20+ other models through our token distribution platform.
-              </p>
-              <a
-                href="#"
-                className="flex items-center justify-center gap-2 w-full py-2 bg-[oklch(0.82_0.18_195)] text-[oklch(0.098_0.008_264)] rounded-sm text-sm font-['Space_Grotesk'] font-600 hover:bg-[oklch(0.88_0.18_195)] transition-colors"
-              >
-                Get API Access
-                <ArrowRight size={13} />
-              </a>
-            </div>
-
-            {/* CTA: Rent GPUs */}
-            <div className="rounded-sm border border-[oklch(0.22_0.008_264)] bg-[oklch(0.11_0.008_264)] p-5">
-              <div className="flex items-center gap-2 mb-3">
-                <Cpu size={14} className="text-blue-400" />
-                <span className="font-mono text-[10px] text-blue-400 uppercase tracking-widest">Partner</span>
-              </div>
-              <h3 className="font-['Space_Grotesk'] font-700 text-[oklch(0.91_0.006_65)] text-base mb-2">
-                H100 & H200 GPU Rentals
-              </h3>
-              <p className="text-[oklch(0.45_0.008_264)] text-xs leading-relaxed mb-4 font-['Source_Serif_4']">
-                On-demand and reserved GPU instances for training, fine-tuning, and inference. Starting at $4.20/hr.
-              </p>
-              <a
-                href="#"
-                className="flex items-center justify-center gap-2 w-full py-2 border border-blue-400/40 text-blue-400 rounded-sm text-sm font-['Space_Grotesk'] font-600 hover:bg-blue-400/10 transition-colors"
-              >
-                Compare GPU Prices
-                <ArrowRight size={13} />
-              </a>
-            </div>
-
-            {/* Latest Articles Compact */}
+            {/* More Stories compact list */}
             <div>
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-1 h-4 bg-[oklch(0.82_0.18_195)] rounded-full" />
-                <h3 className="font-['Space_Grotesk'] font-700 text-[oklch(0.91_0.006_65)] text-xs uppercase tracking-widest">
-                  More Stories
-                </h3>
+              <div className="section-heading">
+                <span>More Stories</span>
               </div>
-              <div className="space-y-1">
+              <div className="space-y-0 divide-y divide-gray-100">
                 {sidebarArticles.map((article) => (
-                  <ArticleCard key={article.id} article={article} variant="compact" />
+                  <Link key={article.id} href={`/article/${article.slug}`}>
+                    <div className="group py-3 cursor-pointer">
+                      <CatBadge cat={article.category} />
+                      <h3 className="font-['Space_Grotesk'] font-600 text-gray-900 text-sm leading-snug mt-1.5 group-hover:text-[#0096B4] transition-colors line-clamp-2">
+                        {article.title}
+                      </h3>
+                      <div className="flex items-center gap-2 mt-1.5 text-gray-400 text-[11px] font-mono">
+                        <span>{article.publishedAt}</span>
+                        <span>·</span>
+                        <Clock size={9} />
+                        <span>{article.readTime}m</span>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+              <Link href="/category/industry-news">
+                <div className="mt-3 flex items-center gap-1 text-[#0096B4] text-xs font-['Space_Grotesk'] font-600 hover:underline cursor-pointer">
+                  View all stories <ChevronRight size={13} />
+                </div>
+              </Link>
+            </div>
+
+            {/* Trending Topics */}
+            <div>
+              <div className="section-heading">
+                <span>Trending Topics</span>
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {["GPT-4o", "H200 GPU", "Claude 3.7", "DeepSeek V3", "Token Pricing", "Inference Cost", "Fine-tuning", "RAG", "Context Window", "Mistral", "LLaMA 3.3", "AI Agents"].map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-2.5 py-1 rounded-sm bg-gray-100 text-gray-600 text-xs font-['Space_Grotesk'] hover:bg-[#E0F7FA] hover:text-[#0096B4] transition-colors cursor-pointer"
+                  >
+                    {tag}
+                  </span>
                 ))}
               </div>
             </div>
 
             {/* Newsletter Mini */}
-            <div className="rounded-sm border border-[oklch(0.22_0.008_264)] bg-[oklch(0.11_0.008_264)] p-5">
-              <h3 className="font-['Space_Grotesk'] font-700 text-[oklch(0.91_0.006_65)] text-sm mb-2">
-                Daily AI Intelligence Brief
+            <div className="rounded-sm border border-gray-200 bg-gray-50 p-5">
+              <h3 className="font-['Space_Grotesk'] font-700 text-gray-900 text-sm mb-1.5">
+                Daily AI Brief
               </h3>
-              <p className="text-[oklch(0.45_0.008_264)] text-xs mb-3 font-['Source_Serif_4']">
-                Join 12,000+ AI professionals. Free, daily.
+              <p className="text-gray-500 text-xs mb-3 font-['Source_Serif_4'] leading-relaxed">
+                Join 12,000+ AI professionals. Free, every morning.
               </p>
               <form className="space-y-2" onSubmit={(e) => e.preventDefault()}>
                 <input
                   type="email"
                   placeholder="your@email.com"
-                  className="w-full bg-[oklch(0.13_0.008_264)] border border-[oklch(0.22_0.008_264)] rounded-sm px-3 py-2 text-xs text-[oklch(0.91_0.006_65)] placeholder-[oklch(0.35_0.008_264)] focus:outline-none focus:border-[oklch(0.82_0.18_195/0.6)] font-mono transition-colors"
+                  className="w-full bg-white border border-gray-200 rounded-sm px-3 py-2 text-xs text-gray-800 placeholder-gray-400 focus:outline-none focus:border-[#0096B4]/60 font-['Space_Grotesk'] transition-colors"
                 />
                 <button
                   type="submit"
-                  className="w-full py-2 bg-[oklch(0.82_0.18_195)] text-[oklch(0.098_0.008_264)] rounded-sm text-xs font-['Space_Grotesk'] font-600 hover:bg-[oklch(0.88_0.18_195)] transition-colors"
+                  className="w-full py-2 bg-[#0096B4] text-white rounded-sm text-xs font-['Space_Grotesk'] font-600 hover:bg-[#007A94] transition-colors"
                 >
                   Subscribe Free
                 </button>
               </form>
+            </div>
+
+            {/* About Box */}
+            <div className="rounded-sm border border-gray-200 p-5">
+              <h3 className="font-['Space_Grotesk'] font-700 text-gray-900 text-sm mb-2">
+                About Token Continent
+              </h3>
+              <p className="text-gray-500 text-xs leading-relaxed font-['Source_Serif_4']">
+                Independent daily coverage of AI token economics, large language model research, GPU infrastructure, and the business of artificial intelligence. Written for practitioners, researchers, and enterprise decision-makers.
+              </p>
+              <Link href="/category/analysis">
+                <div className="mt-3 flex items-center gap-1 text-[#0096B4] text-xs font-['Space_Grotesk'] font-600 hover:underline cursor-pointer">
+                  Read our analysis <ChevronRight size={13} />
+                </div>
+              </Link>
             </div>
           </aside>
         </div>

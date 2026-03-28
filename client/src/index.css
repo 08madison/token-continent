@@ -1,9 +1,9 @@
 /*
- * TokenLedger — Terminal Noir Design System
- * Design Philosophy: Bloomberg Terminal meets cyberpunk editorial
- * Colors: Deep space black bg, electric cyan accent, warm off-white text
- * Typography: Space Grotesk (display) + Source Serif 4 (body) + JetBrains Mono (data)
- * Layout: Asymmetric editorial grid, newspaper density, sticky left rail
+ * Token Continent — Global Design System
+ * Design Philosophy: "Editorial Light" — clean, content-first, newspaper-inspired
+ * Color: White/light-gray background, charcoal text, electric-teal accent (#00B4D8)
+ * Typography: Space Grotesk (headings) + Source Serif 4 (body) + JetBrains Mono (data)
+ * Layout: Asymmetric editorial grid, content density over decoration
  */
 
 @import "tailwindcss";
@@ -48,53 +48,92 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  /* TokenLedger custom tokens */
-  --color-cyan: var(--cyan);
-  --color-cyan-dim: var(--cyan-dim);
-  --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
 }
 
 :root {
-  --radius: 0.25rem;
-  /* Terminal Noir palette */
-  --background: oklch(0.098 0.008 264);       /* #0A0B0E deep space */
-  --foreground: oklch(0.91 0.006 65);          /* #E8EAF0 warm off-white */
-  --card: oklch(0.13 0.008 264);               /* #111318 surface */
-  --card-foreground: oklch(0.91 0.006 65);
-  --popover: oklch(0.13 0.008 264);
-  --popover-foreground: oklch(0.91 0.006 65);
-  --primary: oklch(0.82 0.18 195);             /* #00E5FF electric cyan */
-  --primary-foreground: oklch(0.098 0.008 264);
-  --secondary: oklch(0.16 0.008 264);
-  --secondary-foreground: oklch(0.75 0.01 65);
-  --muted: oklch(0.16 0.008 264);
-  --muted-foreground: oklch(0.55 0.016 264);   /* #8892A4 */
-  --accent: oklch(0.82 0.18 195);
-  --accent-foreground: oklch(0.098 0.008 264);
-  --destructive: oklch(0.62 0.22 15);          /* #FF3B5C breaking red */
+  /* Brand accent: electric teal */
+  --tc-accent: #0096B4;
+  --tc-accent-light: #E0F7FA;
+  --tc-accent-mid: #00B4D8;
+
+  /* Editorial palette */
+  --tc-bg: #FFFFFF;
+  --tc-bg-alt: #F7F8FA;
+  --tc-bg-card: #FFFFFF;
+  --tc-border: #E4E7EC;
+  --tc-border-strong: #CBD2DA;
+  --tc-text-primary: #111827;
+  --tc-text-secondary: #374151;
+  --tc-text-muted: #6B7280;
+  --tc-text-faint: #9CA3AF;
+
+  /* Category colors */
+  --cat-token: #0096B4;
+  --cat-llm: #7C3AED;
+  --cat-gpu: #059669;
+  --cat-news: #DC2626;
+  --cat-analysis: #D97706;
+  --cat-opinion: #DB2777;
+
+  --radius: 0.375rem;
+  --background: #FFFFFF;
+  --foreground: #111827;
+  --card: #FFFFFF;
+  --card-foreground: #111827;
+  --popover: #FFFFFF;
+  --popover-foreground: #111827;
+  --primary: #0096B4;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F7F8FA;
+  --secondary-foreground: #374151;
+  --muted: #F3F4F6;
+  --muted-foreground: #6B7280;
+  --accent: #E0F7FA;
+  --accent-foreground: #0096B4;
+  --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.22 0.008 264);
-  --input: oklch(0.22 0.008 264);
-  --ring: oklch(0.82 0.18 195);
-  --chart-1: oklch(0.82 0.18 195);
-  --chart-2: oklch(0.7 0.15 195);
-  --chart-3: oklch(0.55 0.12 195);
-  --chart-4: oklch(0.62 0.22 15);
-  --chart-5: oklch(0.75 0.12 264);
-  --sidebar: oklch(0.11 0.008 264);
-  --sidebar-foreground: oklch(0.91 0.006 65);
-  --sidebar-primary: oklch(0.82 0.18 195);
-  --sidebar-primary-foreground: oklch(0.098 0.008 264);
-  --sidebar-accent: oklch(0.16 0.008 264);
-  --sidebar-accent-foreground: oklch(0.91 0.006 65);
-  --sidebar-border: oklch(0.22 0.008 264);
-  --sidebar-ring: oklch(0.82 0.18 195);
-  /* Custom tokens */
-  --cyan: oklch(0.82 0.18 195);
-  --cyan-dim: oklch(0.82 0.18 195 / 0.15);
-  --surface: oklch(0.13 0.008 264);
-  --surface-2: oklch(0.16 0.008 264);
+  --border: #E4E7EC;
+  --input: #E4E7EC;
+  --ring: #0096B4;
+  --chart-1: #0096B4;
+  --chart-2: #7C3AED;
+  --chart-3: #059669;
+  --chart-4: #D97706;
+  --chart-5: #DC2626;
+  --sidebar: #F7F8FA;
+  --sidebar-foreground: #111827;
+  --sidebar-primary: #0096B4;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #E0F7FA;
+  --sidebar-accent-foreground: #0096B4;
+  --sidebar-border: #E4E7EC;
+  --sidebar-ring: #0096B4;
+}
+
+.dark {
+  --background: #0F1117;
+  --foreground: #F1F5F9;
+  --card: #1A1D27;
+  --card-foreground: #F1F5F9;
+  --popover: #1A1D27;
+  --popover-foreground: #F1F5F9;
+  --primary: #00B4D8;
+  --primary-foreground: #0F1117;
+  --secondary: #1E2130;
+  --secondary-foreground: #CBD5E1;
+  --muted: #1E2130;
+  --muted-foreground: #94A3B8;
+  --accent: #0F2A35;
+  --accent-foreground: #00B4D8;
+  --border: rgba(255,255,255,0.08);
+  --input: rgba(255,255,255,0.08);
+  --ring: #00B4D8;
+  --sidebar: #1A1D27;
+  --sidebar-foreground: #F1F5F9;
+  --sidebar-accent: #0F2A35;
+  --sidebar-accent-foreground: #00B4D8;
+  --sidebar-border: rgba(255,255,255,0.08);
+  --sidebar-ring: #00B4D8;
 }
 
 @layer base {
@@ -103,9 +142,8 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "kern" 1, "liga" 1;
+    font-family: 'Source Serif 4', Georgia, serif;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
@@ -117,18 +155,6 @@
   input[type="checkbox"]:not(:disabled),
   input[type="radio"]:not(:disabled) {
     @apply cursor-pointer;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-  }
-  p, li, blockquote {
-    font-family: 'Source Serif 4', serif;
-    line-height: 1.75;
-  }
-  code, pre, .mono {
-    font-family: 'JetBrains Mono', monospace;
   }
 }
 
@@ -157,148 +183,165 @@
     .container {
       padding-left: 2rem;
       padding-right: 2rem;
-      max-width: 1320px;
+      max-width: 1280px;
     }
   }
 
-  /* Cyan glow text */
-  .text-cyan-glow {
-    color: oklch(0.82 0.18 195);
-    text-shadow: 0 0 20px oklch(0.82 0.18 195 / 0.4);
-  }
-
-  /* Category badge */
-  .category-badge {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 0.2rem 0.55rem;
+  /* ── Category Badges ── */
+  .cat-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
     border-radius: 2px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
   }
+  .cat-token    { background: #E0F7FA; color: #0096B4; }
+  .cat-llm      { background: #EDE9FE; color: #7C3AED; }
+  .cat-gpu      { background: #D1FAE5; color: #059669; }
+  .cat-news     { background: #FEE2E2; color: #DC2626; }
+  .cat-analysis { background: #FEF3C7; color: #D97706; }
+  .cat-opinion  { background: #FCE7F3; color: #DB2777; }
 
-  /* Article card hover */
+  /* ── Article Card ── */
   .article-card {
-    transition: border-color 0.2s ease, background-color 0.2s ease;
+    background: #FFFFFF;
+    border: 1px solid #E4E7EC;
+    border-radius: 6px;
+    transition: box-shadow 0.18s ease, transform 0.18s ease;
   }
   .article-card:hover {
-    border-color: oklch(0.82 0.18 195 / 0.4);
-    background-color: oklch(0.16 0.008 264);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
   }
 
-  /* Ticker tape */
-  @keyframes ticker-scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+  /* ── Ticker Tape ── */
+  .ticker-wrap {
+    overflow: hidden;
+    white-space: nowrap;
   }
-  .ticker-scroll {
-    animation: ticker-scroll 40s linear infinite;
+  .ticker-inner {
+    display: inline-block;
+    animation: ticker-scroll 60s linear infinite;
   }
-  .ticker-scroll:hover {
+  .ticker-inner:hover {
     animation-play-state: paused;
   }
+  @keyframes ticker-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
 
-  /* Reading progress bar */
+  /* ── Reading Progress ── */
   .reading-progress {
     position: fixed;
     top: 0;
     left: 0;
-    height: 2px;
-    background: oklch(0.82 0.18 195);
-    box-shadow: 0 0 8px oklch(0.82 0.18 195 / 0.6);
+    height: 3px;
+    background: linear-gradient(90deg, #0096B4, #00B4D8);
     z-index: 9999;
     transition: width 0.1s linear;
   }
 
-  /* Cyan divider */
-  .cyan-divider {
-    height: 1px;
-    background: linear-gradient(90deg, oklch(0.82 0.18 195 / 0.6), oklch(0.82 0.18 195 / 0.1));
+  /* ── Article Prose ── */
+  .article-prose {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    color: #1F2937;
   }
-
-  /* Staggered fade-up animation */
-  @keyframes fade-up {
-    from {
-      opacity: 0;
-      transform: translateY(16px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .article-prose p {
+    margin-bottom: 1.4em;
   }
-  .animate-fade-up {
-    animation: fade-up 0.5s ease forwards;
-  }
-
-  /* Scrollbar styling */
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-  ::-webkit-scrollbar-track {
-    background: oklch(0.098 0.008 264);
-  }
-  ::-webkit-scrollbar-thumb {
-    background: oklch(0.25 0.01 264);
-    border-radius: 3px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: oklch(0.82 0.18 195 / 0.5);
-  }
-
-  /* Prose styles for article body */
   .article-prose h2 {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.375rem;
     font-weight: 700;
-    color: oklch(0.91 0.006 65);
-    margin-top: 2.5rem;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid oklch(0.22 0.008 264);
+    color: #111827;
+    margin-top: 2.2em;
+    margin-bottom: 0.7em;
+    padding-bottom: 0.4em;
+    border-bottom: 2px solid #E4E7EC;
   }
   .article-prose h3 {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.2rem;
+    font-size: 1.125rem;
     font-weight: 600;
-    color: oklch(0.91 0.006 65);
-    margin-top: 2rem;
-    margin-bottom: 0.75rem;
-  }
-  .article-prose p {
-    color: oklch(0.78 0.008 65);
-    margin-bottom: 1.25rem;
-    font-size: 1.05rem;
-  }
-  .article-prose blockquote {
-    border-left: 3px solid oklch(0.82 0.18 195);
-    padding-left: 1.25rem;
-    margin: 1.5rem 0;
-    color: oklch(0.82 0.18 195);
-    font-style: italic;
-    font-size: 1.1rem;
-  }
-  .article-prose a {
-    color: oklch(0.82 0.18 195);
-    text-decoration: underline;
-    text-decoration-color: oklch(0.82 0.18 195 / 0.4);
-  }
-  .article-prose a:hover {
-    text-decoration-color: oklch(0.82 0.18 195);
-  }
-  .article-prose ul, .article-prose ol {
-    padding-left: 1.5rem;
-    margin-bottom: 1.25rem;
-    color: oklch(0.78 0.008 65);
-  }
-  .article-prose li {
-    margin-bottom: 0.5rem;
-    font-size: 1.05rem;
+    color: #111827;
+    margin-top: 1.8em;
+    margin-bottom: 0.5em;
   }
   .article-prose strong {
-    color: oklch(0.91 0.006 65);
+    font-weight: 700;
+    color: #111827;
+  }
+  .article-prose blockquote {
+    border-left: 3px solid #0096B4;
+    padding: 0.6em 1.2em;
+    margin: 1.5em 0;
+    background: #F0FAFC;
+    border-radius: 0 4px 4px 0;
+    font-style: italic;
+    color: #374151;
+  }
+  .article-prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.875rem;
+  }
+  .article-prose th {
+    background: #F7F8FA;
     font-weight: 600;
+    padding: 8px 12px;
+    text-align: left;
+    border: 1px solid #E4E7EC;
+    color: #374151;
+  }
+  .article-prose td {
+    padding: 8px 12px;
+    border: 1px solid #E4E7EC;
+    color: #4B5563;
+  }
+  .article-prose tr:nth-child(even) td {
+    background: #F9FAFB;
+  }
+
+  /* ── Section Heading ── */
+  .section-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.25rem;
+  }
+  .section-heading::before {
+    content: '';
+    display: block;
+    width: 3px;
+    height: 18px;
+    background: #0096B4;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .section-heading h2,
+  .section-heading span {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #374151;
+  }
+  .section-heading::after {
+    content: '';
+    display: block;
+    flex: 1;
+    height: 1px;
+    background: #E4E7EC;
   }
 }

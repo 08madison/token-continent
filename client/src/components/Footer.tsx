@@ -1,111 +1,92 @@
 /*
- * TokenLedger — Footer Component
- * Design: Terminal Noir — dark editorial footer with social links
- * Features: Social media links (X, YouTube, LinkedIn, Instagram, Discord), newsletter, nav
+ * Token Continent — Footer
+ * Design: Editorial Light — clean footer with social links and partner friendly links
+ * No hard advertising — partner links presented as "Resources" / "Friendly Links"
  */
 
 import { Link } from "wouter";
+import { Globe, Twitter, Youtube, Linkedin, Instagram, MessageCircle } from "lucide-react";
 import { getAllCategories } from "@/lib/articles";
 
-// Social media SVG icons
-const XIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-  </svg>
-);
+const SOCIAL_LINKS = [
+  { icon: <Twitter size={16} />, label: "X (Twitter)", href: "https://x.com/tokencontinentai", handle: "@tokencontinentai" },
+  { icon: <Youtube size={16} />, label: "YouTube", href: "https://youtube.com/@tokencontinentai", handle: "TokenContinent" },
+  { icon: <Linkedin size={16} />, label: "LinkedIn", href: "https://linkedin.com/company/tokencontinentai", handle: "Token Continent" },
+  { icon: <Instagram size={16} />, label: "Instagram", href: "https://instagram.com/tokencontinentai", handle: "@tokencontinentai" },
+  { icon: <MessageCircle size={16} />, label: "Discord", href: "https://discord.gg/tokencontinentai", handle: "Join Community" },
+];
 
-const YouTubeIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-  </svg>
-);
-
-const LinkedInIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-  </svg>
-);
-
-const InstagramIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
-  </svg>
-);
-
-const DiscordIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-    <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.032.054a19.9 19.9 0 0 0 5.993 3.03.077.077 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
-  </svg>
-);
+const PARTNER_LINKS = [
+  { label: "OpenAI Token Marketplace", href: "#" },
+  { label: "Anthropic API Access", href: "#" },
+  { label: "GPU Cloud Rentals", href: "#" },
+  { label: "CoreWeave H100/H200", href: "#" },
+  { label: "Lambda Labs GPU", href: "#" },
+  { label: "Vast.ai GPU Marketplace", href: "#" },
+];
 
 export default function Footer() {
   const categories = getAllCategories();
 
   return (
-    <footer className="bg-[oklch(0.098_0.008_264)] border-t border-[oklch(0.22_0.008_264)]">
+    <footer className="bg-gray-50 border-t border-gray-200 mt-12">
       {/* Newsletter Section */}
-      <div id="newsletter" className="border-b border-[oklch(0.22_0.008_264)]">
-        <div className="container py-12">
-          <div className="max-w-2xl">
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-1 h-4 bg-[oklch(0.82_0.18_195)] rounded-full" />
-              <span className="font-mono text-[10px] text-[oklch(0.82_0.18_195)] uppercase tracking-widest">Newsletter</span>
-            </div>
-            <h3 className="font-['Space_Grotesk'] text-2xl font-700 text-[oklch(0.91_0.006_65)] mb-2">
-              The AI Token Intelligence Brief
-            </h3>
-            <p className="text-[oklch(0.55_0.016_264)] text-sm mb-5 font-['Source_Serif_4']">
-              Daily analysis on LLM token economics, GPU markets, and AI infrastructure. Trusted by 12,000+ AI professionals.
+      <div id="newsletter" className="bg-[#0096B4]">
+        <div className="container py-10">
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="font-['Space_Grotesk'] font-700 text-white text-xl mb-2">
+              Daily AI Intelligence Brief
+            </h2>
+            <p className="text-[#B2EAF5] text-sm mb-5 font-['Source_Serif_4']">
+              Join 12,000+ AI professionals. Get the day's top stories on LLM tokens, GPU markets, and model releases — free, every morning.
             </p>
-            <form className="flex gap-2 max-w-md" onSubmit={(e) => e.preventDefault()}>
+            <form
+              className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto"
+              onSubmit={(e) => e.preventDefault()}
+            >
               <input
                 type="email"
                 placeholder="your@email.com"
-                className="flex-1 bg-[oklch(0.13_0.008_264)] border border-[oklch(0.22_0.008_264)] rounded-sm px-3 py-2 text-sm text-[oklch(0.91_0.006_65)] placeholder-[oklch(0.4_0.008_264)] focus:outline-none focus:border-[oklch(0.82_0.18_195/0.6)] font-mono transition-colors"
+                className="flex-1 px-4 py-2.5 rounded-sm bg-white/15 border border-white/30 text-white placeholder-white/60 text-sm focus:outline-none focus:border-white/60 font-['Space_Grotesk'] transition-colors"
               />
               <button
                 type="submit"
-                className="px-4 py-2 bg-[oklch(0.82_0.18_195)] text-[oklch(0.098_0.008_264)] rounded-sm text-sm font-['Space_Grotesk'] font-600 hover:bg-[oklch(0.88_0.18_195)] transition-colors whitespace-nowrap"
+                className="px-5 py-2.5 bg-white text-[#0096B4] rounded-sm text-sm font-['Space_Grotesk'] font-700 hover:bg-gray-100 transition-colors whitespace-nowrap"
               >
                 Subscribe Free
               </button>
             </form>
+            <p className="text-white/50 text-xs mt-3 font-['Space_Grotesk']">No spam. Unsubscribe anytime.</p>
           </div>
         </div>
       </div>
 
-      {/* Main Footer */}
+      {/* Main Footer Content */}
       <div className="container py-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Brand */}
-          <div className="md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-7 h-7 rounded-sm bg-[oklch(0.82_0.18_195)] flex items-center justify-center">
-                <span className="font-mono text-[oklch(0.098_0.008_264)] text-xs font-700">TL</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Brand Column */}
+          <div className="lg:col-span-1">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-7 h-7 rounded-sm bg-[#0096B4] flex items-center justify-center">
+                <Globe size={14} className="text-white" />
               </div>
-              <span className="font-['Space_Grotesk'] font-700 text-[oklch(0.91_0.006_65)] text-base">
-                Token<span className="text-[oklch(0.82_0.18_195)]">Ledger</span>
+              <span className="font-['Space_Grotesk'] font-800 text-gray-900 text-base tracking-tight">
+                Token<span className="text-[#0096B4]">Continent</span>
               </span>
-            </Link>
-            <p className="text-[oklch(0.45_0.008_264)] text-xs leading-relaxed font-['Source_Serif_4'] mb-5">
-              The leading intelligence platform for AI tokens, large language models, and GPU infrastructure.
+            </div>
+            <p className="text-gray-500 text-sm leading-relaxed font-['Source_Serif_4'] mb-4">
+              The independent intelligence platform for AI token economics, LLM research, and GPU infrastructure. Published daily for AI professionals worldwide.
             </p>
             {/* Social Links */}
-            <div className="flex items-center gap-2">
-              {[
-                { href: "https://twitter.com/tokenledger", icon: <XIcon />, label: "X (Twitter)" },
-                { href: "https://youtube.com/@tokenledger", icon: <YouTubeIcon />, label: "YouTube" },
-                { href: "https://linkedin.com/company/tokenledger", icon: <LinkedInIcon />, label: "LinkedIn" },
-                { href: "https://instagram.com/tokenledger", icon: <InstagramIcon />, label: "Instagram" },
-                { href: "https://discord.gg/tokenledger", icon: <DiscordIcon />, label: "Discord" },
-              ].map(({ href, icon, label }) => (
+            <div className="flex flex-wrap gap-2">
+              {SOCIAL_LINKS.map(({ icon, label, href }) => (
                 <a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-8 h-8 rounded-sm border border-[oklch(0.22_0.008_264)] flex items-center justify-center text-[oklch(0.45_0.008_264)] hover:text-[oklch(0.82_0.18_195)] hover:border-[oklch(0.82_0.18_195/0.4)] transition-all"
+                  className="w-8 h-8 flex items-center justify-center rounded-sm border border-gray-200 text-gray-500 hover:text-[#0096B4] hover:border-[#0096B4]/40 hover:bg-[#E0F7FA] transition-all"
                 >
                   {icon}
                 </a>
@@ -113,88 +94,77 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Coverage */}
+          {/* Coverage Column */}
           <div>
-            <h4 className="font-['Space_Grotesk'] text-xs font-600 text-[oklch(0.91_0.006_65)] uppercase tracking-widest mb-4">Coverage</h4>
+            <h3 className="font-['Space_Grotesk'] font-700 text-gray-800 text-xs uppercase tracking-widest mb-3">Coverage</h3>
             <ul className="space-y-2">
               {categories.map((cat) => (
                 <li key={cat}>
-                  <Link
-                    href={`/category/${cat.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
-                    className="text-xs text-[oklch(0.45_0.008_264)] hover:text-[oklch(0.82_0.18_195)] transition-colors font-['Space_Grotesk']"
-                  >
-                    {cat}
+                  <Link href={`/category/${cat.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>
+                    <span className="text-gray-500 hover:text-[#0096B4] text-sm font-['Space_Grotesk'] transition-colors">
+                      {cat}
+                    </span>
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Resources */}
+          {/* Follow Us Column */}
           <div>
-            <h4 className="font-['Space_Grotesk'] text-xs font-600 text-[oklch(0.91_0.006_65)] uppercase tracking-widest mb-4">Resources</h4>
-            <ul className="space-y-2">
-              {[
-                { label: "Token Price Calculator", href: "#" },
-                { label: "GPU Rental Comparison", href: "#" },
-                { label: "LLM Benchmark Index", href: "#" },
-                { label: "API Provider Directory", href: "#" },
-                { label: "AI Glossary", href: "#" },
-              ].map(({ label, href }) => (
+            <h3 className="font-['Space_Grotesk'] font-700 text-gray-800 text-xs uppercase tracking-widest mb-3">Follow Us</h3>
+            <ul className="space-y-2.5">
+              {SOCIAL_LINKS.map(({ icon, label, href, handle }) => (
                 <li key={label}>
-                  <a href={href} className="text-xs text-[oklch(0.45_0.008_264)] hover:text-[oklch(0.82_0.18_195)] transition-colors font-['Space_Grotesk']">
-                    {label}
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-gray-500 hover:text-[#0096B4] transition-colors group"
+                  >
+                    <span className="text-gray-400 group-hover:text-[#0096B4] transition-colors">{icon}</span>
+                    <div>
+                      <div className="text-xs font-['Space_Grotesk'] font-500 text-gray-700 group-hover:text-[#0096B4] transition-colors leading-none">{label}</div>
+                      <div className="text-[11px] text-gray-400 font-mono leading-none mt-0.5">{handle}</div>
+                    </div>
                   </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Partners CTA */}
+          {/* Friendly Links Column */}
           <div>
-            <h4 className="font-['Space_Grotesk'] text-xs font-600 text-[oklch(0.91_0.006_65)] uppercase tracking-widest mb-4">Get Started</h4>
-            <div className="space-y-3">
-              <a
-                href="#"
-                className="flex items-center gap-2 p-3 rounded-sm border border-[oklch(0.82_0.18_195/0.3)] bg-[oklch(0.82_0.18_195/0.05)] hover:bg-[oklch(0.82_0.18_195/0.1)] transition-colors group"
-              >
-                <div className="w-6 h-6 rounded-sm bg-[oklch(0.82_0.18_195/0.2)] flex items-center justify-center flex-shrink-0">
-                  <span className="text-[oklch(0.82_0.18_195)] text-[10px] font-mono font-700">T</span>
-                </div>
-                <div>
-                  <div className="text-[oklch(0.82_0.18_195)] text-xs font-['Space_Grotesk'] font-600">Buy AI Tokens</div>
-                  <div className="text-[oklch(0.45_0.008_264)] text-[10px] font-mono">Discounted API access</div>
-                </div>
-              </a>
-              <a
-                href="#"
-                className="flex items-center gap-2 p-3 rounded-sm border border-[oklch(0.22_0.008_264)] hover:border-[oklch(0.82_0.18_195/0.3)] hover:bg-[oklch(0.82_0.18_195/0.05)] transition-colors group"
-              >
-                <div className="w-6 h-6 rounded-sm bg-[oklch(0.16_0.008_264)] flex items-center justify-center flex-shrink-0">
-                  <span className="text-blue-400 text-[10px] font-mono font-700">G</span>
-                </div>
-                <div>
-                  <div className="text-[oklch(0.75_0.008_65)] text-xs font-['Space_Grotesk'] font-600 group-hover:text-[oklch(0.91_0.006_65)] transition-colors">Rent GPUs</div>
-                  <div className="text-[oklch(0.45_0.008_264)] text-[10px] font-mono">H100/H200 on demand</div>
-                </div>
-              </a>
-            </div>
+            <h3 className="font-['Space_Grotesk'] font-700 text-gray-800 text-xs uppercase tracking-widest mb-3">Friendly Links</h3>
+            <ul className="space-y-2">
+              {PARTNER_LINKS.map(({ label, href }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-500 hover:text-[#0096B4] text-sm font-['Space_Grotesk'] transition-colors flex items-center gap-1 group"
+                  >
+                    <span className="w-1 h-1 rounded-full bg-gray-300 group-hover:bg-[#0096B4] transition-colors flex-shrink-0" />
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-[oklch(0.22_0.008_264)]">
-        <div className="container py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-[oklch(0.35_0.008_264)] text-[11px] font-mono">
-            © 2026 TokenLedger. All rights reserved.
+      <div className="border-t border-gray-200">
+        <div className="container py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+          <p className="text-gray-400 text-xs font-['Space_Grotesk']">
+            © {new Date().getFullYear()} Token Continent. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            {["Privacy Policy", "Terms of Service", "Advertise"].map((item) => (
-              <a key={item} href="#" className="text-[oklch(0.35_0.008_264)] text-[11px] font-mono hover:text-[oklch(0.82_0.18_195)] transition-colors">
-                {item}
-              </a>
-            ))}
+            <a href="#" className="text-gray-400 hover:text-gray-600 text-xs font-['Space_Grotesk'] transition-colors">Privacy Policy</a>
+            <a href="#" className="text-gray-400 hover:text-gray-600 text-xs font-['Space_Grotesk'] transition-colors">Terms of Use</a>
+            <a href="#" className="text-gray-400 hover:text-gray-600 text-xs font-['Space_Grotesk'] transition-colors">Contact</a>
           </div>
         </div>
       </div>
