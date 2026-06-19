@@ -128,12 +128,12 @@ function ProjectAttribution(props: { currentYear: number; inline?: boolean }) {
     <span className='text-muted-foreground/45'>
       &copy; {props.currentYear}{' '}
       <a
-        href='https://github.com/QuantumNous/new-api'
+        href='https://github.com/08madison/token-continent'
         target='_blank'
         rel='noopener noreferrer'
         className='text-foreground/70 hover:text-foreground font-medium transition-colors'
       >
-        {t('New API')}
+        {t('Token Continent')}
       </a>
       . {t(NEW_API_FOOTER_ATTRIBUTION_KEY)}
     </span>
@@ -158,7 +158,7 @@ export function Footer(props: FooterProps) {
   } = useSystemConfig()
 
   const displayLogo = systemLogo || props.logo || '/logo.png'
-  const displayName = systemName || props.name || 'New API'
+  const displayName = systemName || props.name || 'Token Continent'
   const isDemoSiteMode = Boolean(demoSiteEnabled)
   const currentYear = new Date().getFullYear()
 
@@ -169,15 +169,15 @@ export function Footer(props: FooterProps) {
         links: [
           {
             text: t('footer.columns.about.links.aboutProject'),
-            href: 'https://docs.newapi.pro/wiki/project-introduction/',
+            href: 'https://docs.tokencontinent.pro/wiki/project-introduction/',
           },
           {
             text: t('footer.columns.about.links.contact'),
-            href: 'https://docs.newapi.pro/support/community-interaction/',
+            href: 'https://docs.tokencontinent.pro/support/community-interaction/',
           },
           {
             text: t('footer.columns.about.links.features'),
-            href: 'https://docs.newapi.pro/wiki/features-introduction/',
+            href: 'https://docs.tokencontinent.pro/wiki/features-introduction/',
           },
         ],
       },
@@ -186,15 +186,15 @@ export function Footer(props: FooterProps) {
         links: [
           {
             text: t('footer.columns.docs.links.quickStart'),
-            href: 'https://docs.newapi.pro/getting-started/',
+            href: 'https://docs.tokencontinent.pro/getting-started/',
           },
           {
             text: t('footer.columns.docs.links.installation'),
-            href: 'https://docs.newapi.pro/installation/',
+            href: 'https://docs.tokencontinent.pro/installation/',
           },
           {
             text: t('footer.columns.docs.links.apiDocs'),
-            href: 'https://docs.newapi.pro/api/',
+            href: 'https://docs.tokencontinent.pro/api/',
           },
         ],
       },
@@ -211,7 +211,7 @@ export function Footer(props: FooterProps) {
           },
           {
             text: t('footer.columns.related.links.newApiKeyTool'),
-            href: 'https://github.com/Calcium-Ion/new-api-key-tool',
+            href: 'https://github.com/Calcium-Ion/token-continent-key-tool',
           },
         ],
       },

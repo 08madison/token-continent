@@ -8,11 +8,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/QuantumNous/new-api/common"
-	"github.com/QuantumNous/new-api/constant"
-	"github.com/QuantumNous/new-api/model"
-	"github.com/QuantumNous/new-api/relay/channel/codex"
-	"github.com/QuantumNous/new-api/service"
+	"github.com/QuantumNous/token-continent/common"
+	"github.com/QuantumNous/token-continent/constant"
+	"github.com/QuantumNous/token-continent/model"
+	"github.com/QuantumNous/token-continent/relay/channel/codex"
+	"github.com/QuantumNous/token-continent/service"
 
 	"github.com/gin-gonic/gin"
 )

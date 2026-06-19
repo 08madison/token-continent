@@ -6,11 +6,11 @@ import (
 	"reflect"
 	"testing"
 
-	common2 "github.com/QuantumNous/new-api/common"
-	"github.com/QuantumNous/new-api/types"
+	common2 "github.com/QuantumNous/token-continent/common"
+	"github.com/QuantumNous/token-continent/types"
 
-	"github.com/QuantumNous/new-api/dto"
-	"github.com/QuantumNous/new-api/setting/model_setting"
+	"github.com/QuantumNous/token-continent/dto"
+	"github.com/QuantumNous/token-continent/setting/model_setting"
 	"github.com/samber/lo"
 	"github.com/stretchr/testify/require"
 )

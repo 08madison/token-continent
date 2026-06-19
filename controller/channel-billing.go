@@ -9,12 +9,12 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/QuantumNous/new-api/common"
-	"github.com/QuantumNous/new-api/constant"
-	"github.com/QuantumNous/new-api/model"
-	"github.com/QuantumNous/new-api/service"
-	"github.com/QuantumNous/new-api/setting/operation_setting"
-	"github.com/QuantumNous/new-api/types"
+	"github.com/QuantumNous/token-continent/common"
+	"github.com/QuantumNous/token-continent/constant"
+	"github.com/QuantumNous/token-continent/model"
+	"github.com/QuantumNous/token-continent/service"
+	"github.com/QuantumNous/token-continent/setting/operation_setting"
+	"github.com/QuantumNous/token-continent/types"
 
 	"github.com/shopspring/decimal"
 

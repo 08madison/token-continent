@@ -1,10 +1,10 @@
 package controller
 
 import (
-	"github.com/QuantumNous/new-api/common"
-	"github.com/QuantumNous/new-api/model"
-	"github.com/QuantumNous/new-api/service"
-	"github.com/QuantumNous/new-api/setting/ratio_setting"
+	"github.com/QuantumNous/token-continent/common"
+	"github.com/QuantumNous/token-continent/model"
+	"github.com/QuantumNous/token-continent/service"
+	"github.com/QuantumNous/token-continent/setting/ratio_setting"
 
 	"github.com/gin-gonic/gin"
 )

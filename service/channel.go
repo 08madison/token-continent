@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/QuantumNous/new-api/common"
-	"github.com/QuantumNous/new-api/dto"
-	"github.com/QuantumNous/new-api/model"
-	"github.com/QuantumNous/new-api/setting/operation_setting"
-	"github.com/QuantumNous/new-api/types"
+	"github.com/QuantumNous/token-continent/common"
+	"github.com/QuantumNous/token-continent/dto"
+	"github.com/QuantumNous/token-continent/model"
+	"github.com/QuantumNous/token-continent/setting/operation_setting"
+	"github.com/QuantumNous/token-continent/types"
 )
 
 func formatNotifyType(channelId int, status int) string {

@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/QuantumNous/new-api/dto"
+	"github.com/QuantumNous/token-continent/dto"
 	"github.com/stretchr/testify/require"
 )
 
