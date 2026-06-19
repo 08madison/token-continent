@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: token-continent
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter
+    envVars:
+      - key: TZ
+        value: Asia/Shanghai
+      - key: ERROR_LOG_ENABLED
+        value: "true"
+      - key: BATCH_UPDATE_ENABLED
+        value: "true"
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: SQL_DSN
+        fromDatabase:
+          name: token-continent-db
+          property: connectionString
+    healthCheckPath: /api/status
+    domains:
+      - tokencontinent.com
+      - www.tokencontinent.com
+
+databases:
+  - name: token-continent-db
+    plan: starter
+    databaseName: tokencontinent
+    user: tcadmin
