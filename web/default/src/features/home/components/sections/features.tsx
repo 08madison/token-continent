@@ -38,11 +38,11 @@ export function Features(_props: FeaturesProps) {
 
   const features = [
     {
-      id: 'fast',
+      id: 'gateway',
       num: '01',
-      title: t('Lightning Fast'),
+      title: t('Unified Model Gateway'),
       desc: t(
-        'Optimized network architecture ensures millisecond response times'
+        'Chat, embedding, image and task requests all accessible through a single unified API.'
       ),
       span: 'md:col-span-2',
       icon: <Zap className='size-4 text-blue-400' />,
@@ -62,57 +62,22 @@ export function Features(_props: FeaturesProps) {
       ),
     },
     {
-      id: 'secure',
+      id: 'roles',
       num: '02',
-      title: t('Secure & Reliable'),
+      title: t('Role-based Dashboards'),
       desc: t(
-        'Enterprise-grade security with comprehensive permission management'
+        'Admin, reseller and user each have their own isolated workspace with clear permissions.'
       ),
       span: 'md:col-span-1',
       icon: <Shield className='size-4 text-emerald-400' />,
       visual: (
-        <div className='mt-4 flex items-center justify-center'>
-          <div className='relative'>
-            <div className='flex size-16 items-center justify-center rounded-2xl border border-emerald-500/20 bg-emerald-500/5'>
-              <Shield
-                className='size-7 text-emerald-500/70'
-                strokeWidth={1.5}
-              />
-            </div>
-            <div className='absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full bg-emerald-500'>
-              <svg
-                className='size-2.5 text-white'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke='currentColor'
-                strokeWidth={3}
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='m4.5 12.75 6 6 9-13.5'
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
-      ),
-    },
-    {
-      id: 'global',
-      num: '03',
-      title: t('Global Coverage'),
-      desc: t('Multi-region deployment for stable global access'),
-      span: 'md:col-span-1',
-      icon: <Globe className='size-4 text-violet-400' />,
-      visual: (
         <div className='mt-4 space-y-2'>
-          {[t('Load Balancing'), t('Rate Limiting'), t('Cost Tracking')].map(
-            (step, i) => (
-              <div key={step} className='flex items-center gap-2'>
+          {[t('Admin'), t('Reseller'), t('User')].map(
+            (role, i) => (
+              <div key={role} className='flex items-center gap-2'>
                 <div
                   className={`flex size-6 items-center justify-center rounded-full text-[10px] font-bold ${
-                    i === 1
+                    i === 0
                       ? 'border border-blue-500/30 bg-blue-500/20 text-blue-500'
                       : 'border-border/40 bg-muted text-muted-foreground border'
                   }`}
@@ -120,7 +85,7 @@ export function Features(_props: FeaturesProps) {
                   {i + 1}
                 </div>
                 <div className='bg-border/40 h-px flex-1' />
-                <span className='text-muted-foreground text-xs'>{step}</span>
+                <span className='text-muted-foreground text-xs'>{role}</span>
               </div>
             )
           )}
@@ -128,27 +93,38 @@ export function Features(_props: FeaturesProps) {
       ),
     },
     {
-      id: 'developer',
+      id: 'reseller',
+      num: '03',
+      title: t('Reseller & Sub-account'),
+      desc: t('Create sub-users, track commissions, and manage distribution tiers.'),
+      span: 'md:col-span-1',
+      icon: <Globe className='size-4 text-violet-400' />,
+      visual: (
+        <div className='mt-4 flex items-center justify-center'>
+          <div className='text-muted-foreground/60 text-center text-xs leading-relaxed'>
+            <div className='mb-1 font-medium text-violet-400'>{t('Sub-accounts')} · {t('Commission')} · {t('Quota')}</div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: 'billing',
       num: '04',
-      title: t('Developer Friendly'),
-      desc: t('Compatible API routes for common AI application workflows'),
+      title: t('Transparent Billing'),
+      desc: t('Real-time quota, usage logs and wallet top-up. Full account spending visibility.'),
       span: 'md:col-span-2',
       icon: <Code className='size-4 text-amber-400' />,
       visual: (
         <div className='mt-4 flex items-center gap-3'>
           <div className='flex -space-x-2'>
-            {['API', 'SDK', 'CLI', 'Docs'].map((n) => (
+            {[t('Billing'), t('Logs'), t('Wallet')].map((n) => (
               <div
                 key={n}
-                className='border-background from-muted to-muted/60 text-muted-foreground flex size-8 items-center justify-center rounded-full border-2 bg-gradient-to-br text-[9px] font-bold'
+                className='border-background from-muted to-muted/60 text-muted-foreground flex h-8 items-center justify-center rounded-full border-2 bg-gradient-to-br px-3 text-[9px] font-bold'
               >
                 {n}
               </div>
             ))}
-          </div>
-          <div className='text-muted-foreground flex items-center gap-1.5 text-xs'>
-            <Code className='size-3.5 text-blue-500' />
-            {t('Multi-protocol Compatible')}
           </div>
         </div>
       ),
@@ -157,24 +133,24 @@ export function Features(_props: FeaturesProps) {
 
   const additionalFeatures = [
     {
-      icon: <Gauge className='size-5' strokeWidth={1.5} />,
-      title: t('High Performance'),
-      desc: t('Support for high concurrency with automatic load balancing'),
+      icon: <Shield className='size-5' strokeWidth={1.5} />,
+      title: t('Secure & Reliable'),
+      desc: t('Enterprise-grade security with comprehensive permission management'),
     },
     {
-      icon: <DollarSign className='size-5' strokeWidth={1.5} />,
-      title: t('Transparent Billing'),
-      desc: t('Pay-as-you-go with real-time usage monitoring'),
+      icon: <Code className='size-5' strokeWidth={1.5} />,
+      title: t('Developer Friendly'),
+      desc: t('Compatible API routes for common AI application workflows'),
     },
     {
       icon: <Users className='size-5' strokeWidth={1.5} />,
-      title: t('Team Collaboration'),
-      desc: t('Multi-user management with flexible permission allocation'),
+      title: t('Multi-tenant Ready'),
+      desc: t('Isolated tenants, channels and users. Perfect for SaaS or reseller deployment.'),
     },
     {
-      icon: <HeartHandshake className='size-5' strokeWidth={1.5} />,
-      title: t('Open Source'),
-      desc: t('Community driven, self-hosted, and extensible'),
+      icon: <Zap className='size-5' strokeWidth={1.5} />,
+      title: t('Lightning Fast'),
+      desc: t('Optimized network architecture ensures millisecond response times'),
     },
   ]
 
@@ -186,9 +162,9 @@ export function Features(_props: FeaturesProps) {
             {t('Core Features')}
           </p>
           <h2 className='text-2xl leading-tight font-bold tracking-tight md:text-3xl'>
-            {t('Built for developers,')}
+            {t('Everything you need to')}
             <br />
-            {t('designed for scale')}
+            {t('run an AI API platform')}
           </h2>
         </AnimateInView>
 

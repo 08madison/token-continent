@@ -144,7 +144,6 @@ export function Hero(props: HeroProps) {
                   {t('Go to Dashboard')}
                   <ArrowRight className='ml-1.5 size-4 transition-transform duration-200 group-hover:translate-x-0.5' />
                 </Button>
-                {renderDocsButton()}
               </>
             ) : (
               <>
@@ -162,9 +161,28 @@ export function Hero(props: HeroProps) {
                 >
                   {t('View Pricing')}
                 </Button>
-                {renderDocsButton()}
               </>
             )}
+          </div>
+
+          {/* Feature tags - 低延迟路由 / 多模型支持 / OpenAI 兼容 */}
+          <div
+            className='landing-animate-fade-up mt-6 flex flex-wrap items-center gap-4 opacity-0'
+            style={{ animationDelay: '220ms' }}
+          >
+            {[
+              { icon: '⚡', label: t('Low-latency Routing') },
+              { icon: '🤖', label: t('Multi-model Support') },
+              { icon: '🔗', label: t('OpenAI Compatible') },
+            ].map((tag) => (
+              <div
+                key={tag.label}
+                className='text-muted-foreground/70 flex items-center gap-1.5 text-xs'
+              >
+                <span>{tag.icon}</span>
+                <span>{tag.label}</span>
+              </div>
+            ))}
           </div>
 
           {/* Supported Apps (参考图二样式，进行卡片化和信息扩充设计，增加视觉高度) */}

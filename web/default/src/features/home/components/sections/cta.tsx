@@ -52,16 +52,19 @@ export function CTA(props: CTAProps) {
         className='mx-auto max-w-2xl text-center'
         animation='scale-in'
       >
+        <p className='text-muted-foreground mb-3 text-xs font-bold tracking-[0.2em] uppercase'>
+          TOKEN CONTINENT
+        </p>
         <h2 className='text-2xl leading-tight font-bold tracking-tight md:text-4xl'>
-          {t('Ready to simplify')}
+          {t('Build your AI gateway')}
           <br />
           <span className='bg-gradient-to-r from-blue-400 via-violet-400 to-purple-500 bg-clip-text text-transparent'>
-            {t('your AI integration?')}
+            {t('right now')}
           </span>
         </h2>
         <p className='text-muted-foreground/80 mx-auto mt-5 max-w-md text-sm leading-relaxed md:text-base'>
           {t(
-            'Deploy your own gateway and start routing requests through your configured upstream services.'
+            'Sign up for Token Continent and connect your application in minutes, no infrastructure binding required.'
           )}
         </p>
         <div className='mt-8 flex items-center justify-center gap-3'>
