@@ -46,7 +46,9 @@ RUN apt-get update \
     && update-ca-certificates
 
 COPY --from=builder2 /build/token-continent /
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 COPY LICENSE NOTICE THIRD-PARTY-LICENSES.md /licenses/
 EXPOSE 3000
 WORKDIR /data
-ENTRYPOINT ["/token-continent"]
+ENTRYPOINT ["/entrypoint.sh"]
