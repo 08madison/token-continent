@@ -15,4 +15,4 @@ if [ -n "$RESET_ADMIN_PASSWORD" ]; then
 fi
 
 # Start the main application
-exec /new-api "$@"
+exec /token-continent "$@"
