@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/QuantumNous/token-continent/common"
-	"github.com/QuantumNous/token-continent/types"
+	"github.com/QuantumNous/new-api/common"
+	"github.com/QuantumNous/new-api/types"
 )
 
 const (

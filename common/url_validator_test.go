@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/QuantumNous/token-continent/constant"
+	"github.com/QuantumNous/new-api/constant"
 )
 
 func TestValidateRedirectURL(t *testing.T) {

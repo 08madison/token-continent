@@ -10,9 +10,9 @@ import (
 	"golang.org/x/text/language"
 	"gopkg.in/yaml.v3"
 
-	"github.com/QuantumNous/token-continent/common"
-	"github.com/QuantumNous/token-continent/constant"
-	"github.com/QuantumNous/token-continent/dto"
+	"github.com/QuantumNous/new-api/common"
+	"github.com/QuantumNous/new-api/constant"
+	"github.com/QuantumNous/new-api/dto"
 )
 
 const (

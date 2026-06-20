@@ -7,11 +7,11 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/QuantumNous/token-continent/common"
-	"github.com/QuantumNous/token-continent/logger"
-	"github.com/QuantumNous/token-continent/model"
-	"github.com/QuantumNous/token-continent/setting"
-	"github.com/QuantumNous/token-continent/setting/operation_setting"
+	"github.com/QuantumNous/new-api/common"
+	"github.com/QuantumNous/new-api/logger"
+	"github.com/QuantumNous/new-api/model"
+	"github.com/QuantumNous/new-api/setting"
+	"github.com/QuantumNous/new-api/setting/operation_setting"
 	"github.com/gin-gonic/gin"
 	"github.com/thanhpk/randstr"
 )

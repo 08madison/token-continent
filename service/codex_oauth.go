@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/QuantumNous/token-continent/common"
+	"github.com/QuantumNous/new-api/common"
 )
 
 const (

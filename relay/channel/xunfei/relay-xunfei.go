@@ -11,11 +11,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/QuantumNous/token-continent/common"
-	"github.com/QuantumNous/token-continent/constant"
-	"github.com/QuantumNous/token-continent/dto"
-	"github.com/QuantumNous/token-continent/relay/helper"
-	"github.com/QuantumNous/token-continent/types"
+	"github.com/QuantumNous/new-api/common"
+	"github.com/QuantumNous/new-api/constant"
+	"github.com/QuantumNous/new-api/dto"
+	"github.com/QuantumNous/new-api/relay/helper"
+	"github.com/QuantumNous/new-api/types"
 	"github.com/samber/lo"
 
 	"github.com/gin-gonic/gin"

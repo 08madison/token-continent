@@ -6,8 +6,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/QuantumNous/token-continent/common"
-	"github.com/QuantumNous/token-continent/constant"
+	"github.com/QuantumNous/new-api/common"
+	"github.com/QuantumNous/new-api/constant"
 	"github.com/bytedance/gopkg/util/gopool"
 )
 

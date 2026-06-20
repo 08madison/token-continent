@@ -10,11 +10,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/QuantumNous/token-continent/common"
-	"github.com/QuantumNous/token-continent/constant"
-	"github.com/QuantumNous/token-continent/logger"
-	relaycommon "github.com/QuantumNous/token-continent/relay/common"
-	"github.com/QuantumNous/token-continent/setting/operation_setting"
+	"github.com/QuantumNous/new-api/common"
+	"github.com/QuantumNous/new-api/constant"
+	"github.com/QuantumNous/new-api/logger"
+	relaycommon "github.com/QuantumNous/new-api/relay/common"
+	"github.com/QuantumNous/new-api/setting/operation_setting"
 
 	"github.com/bytedance/gopkg/util/gopool"
 

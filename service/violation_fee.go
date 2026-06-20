@@ -5,12 +5,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/QuantumNous/token-continent/common"
-	"github.com/QuantumNous/token-continent/logger"
-	"github.com/QuantumNous/token-continent/model"
-	relaycommon "github.com/QuantumNous/token-continent/relay/common"
-	"github.com/QuantumNous/token-continent/setting/model_setting"
-	"github.com/QuantumNous/token-continent/types"
+	"github.com/QuantumNous/new-api/common"
+	"github.com/QuantumNous/new-api/logger"
+	"github.com/QuantumNous/new-api/model"
+	relaycommon "github.com/QuantumNous/new-api/relay/common"
+	"github.com/QuantumNous/new-api/setting/model_setting"
+	"github.com/QuantumNous/new-api/types"
 
 	"github.com/shopspring/decimal"
 

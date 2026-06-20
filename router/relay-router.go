@@ -1,11 +1,11 @@
 package router
 
 import (
-	"github.com/QuantumNous/token-continent/constant"
-	"github.com/QuantumNous/token-continent/controller"
-	"github.com/QuantumNous/token-continent/middleware"
-	"github.com/QuantumNous/token-continent/relay"
-	"github.com/QuantumNous/token-continent/types"
+	"github.com/QuantumNous/new-api/constant"
+	"github.com/QuantumNous/new-api/controller"
+	"github.com/QuantumNous/new-api/middleware"
+	"github.com/QuantumNous/new-api/relay"
+	"github.com/QuantumNous/new-api/types"
 
 	"github.com/gin-gonic/gin"
 )

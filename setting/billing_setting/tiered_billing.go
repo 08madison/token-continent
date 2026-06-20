@@ -3,8 +3,8 @@ package billing_setting
 import (
 	"fmt"
 
-	"github.com/QuantumNous/token-continent/pkg/billingexpr"
-	"github.com/QuantumNous/token-continent/setting/config"
+	"github.com/QuantumNous/new-api/pkg/billingexpr"
+	"github.com/QuantumNous/new-api/setting/config"
 	"github.com/samber/lo"
 )
 

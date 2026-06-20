@@ -7,7 +7,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/QuantumNous/token-continent/model"
+	"github.com/QuantumNous/new-api/model"
 )
 
 const (
